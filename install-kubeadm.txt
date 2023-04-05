@@ -1,3 +1,11 @@
+
+---------------------------
+1)choose centos ami image
+-----------------------
+#ami-04ebf66b7be0500f6
+------------------------------------
+2)install first 3 instances in userdata section
+--------------------------------------------------
 #!/bin/bash
 set -x
 sudo setenforce 0
@@ -35,16 +43,23 @@ sudo systemctl start docker
 sudo systemctl enable --now kubelet
 sudo rm -f /etc/containerd/config.toml
 sudo systemctl restart containerd
+----------------------------------------
+3)#change hostname 
+#hostnamectl set-hostname master / node1 /node2
 
-
-#ami-04ebf66b7be0500f6
-
+---------------------------
+4)kubeadm init--> (in master node) later you will get few 3 commands execute those 3 in master node and join command also you need add and execute that command in workernode.
+ check here nodes:
+ kubectl get nodes --> showing not ready state for that u need install cni weave plugin in master. if sometimes nodes not ready or any problem then u need to restart the kubeadm or delete again satrt or init.
+ 
+-------------------------------
+#cni waeve net plugin install
 #kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+ after check then nodes coming to ready state
 # 30000 - 32767
 
 
-#change hostname 
-#hostnamectl set-hostname master / node1 /node2
+
 #exit
 #sudo su -
 
