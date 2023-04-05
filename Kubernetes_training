@@ -196,7 +196,7 @@ Lab: 3 Static Pod
 
 To create static pod use folloing commands on worker or master node whereever 
 you want ot place static pod
-
+if you have any pod.yml file then if u place that file in this path then pod automatically creates without create or apply command.
 cd /etc/kubernetes/manifests/
 
 create following static-pod.yaml file here 
@@ -227,7 +227,9 @@ kubectl delete -f static-pod.yaml
 
 
 
-Lab 4: Kubernetes Network Policy
+Lab 4: Kubernetes Network Policy:
+-------------------------------------
+#restrict connections from container to container here see which container to which container connections needs and which to wchich container i dnt need connection for that we make a network policy
 
 kubectl run backend --image=nginx --labels role=backend --expose --port=80
 
@@ -239,7 +241,7 @@ kubectl run --rm -it --image=busybox net-policy
 wget -qO- -T3 http://backend
 exit
 
-3.	Create a network policy which uses labels to deny all ingress traffic
+3.Create a network policy which uses labels to deny all ingress traffic
 
 vi np-deny-all.yml
 
@@ -256,7 +258,7 @@ spec:
 kubectl create -f np-deny-all.yml
 kubectl get networkpolicies
 
-4.	Create a new busybox pod again and verify that it cannot access the backend service
+4.Create a new busybox pod again and verify that it cannot access the backend service
 
 kubectl run --rm -it --image=busybox net-policy
 wget -qO- -T3 http://backend
@@ -265,7 +267,7 @@ exit
 
 
 
-5.	Modify the network policy to allow traffic with matching Pod labels 
+5.Modify the network policy to allow traffic with matching Pod labels 
 Inspect the network policy and notice the selectors
 
 vi np-pod-label-allow.yml
@@ -286,7 +288,7 @@ spec:
           role: frontend
 		  
 
-before applyinh this yaml describe networkpolicies to check rule
+before applying this yaml describe networkpolicies to check rule
 
 kubectl describe networkpolicies backend-policy
 
@@ -395,7 +397,8 @@ Task 2: Node labeling and constraining pods
 list node labels
 kubectl get nodes --show-labels
 
-kubectl label nodes <node_name> disktype=ssd
+kubectl label nodes <node_name> disktype=ssd # creating label for node
+kubectl label nodes <node_name> disktyp- # deleting label for node
 
 list you nodes to check labels 
 kubectl get nodes --show-labels | grep "disktype=ssd"
@@ -422,7 +425,9 @@ kubectl get pods -o wide
 ### Advanced Pod Scheduling
 
 Task 3: Node Affinity
-
+----------------------
+in prefered rule initially pod scheduled to label node if none of node doesnt have any label then pod scheduled to none of label node.its desnt depends on label.
+--------------------------------------------
 vi node-aff-pref.yaml
 
 apiVersion: v1
@@ -574,7 +579,8 @@ kubectl get pod -o wide
 kubectl delete -f  pod-antiaff.yaml
 
 
-Lab: 8 Taint and tolerations
+Lab: 8 Taint and tolerations:
+---------------------------------
 
 Task 2: Taint and tolerations
 
@@ -582,6 +588,21 @@ taint node
 
 kubectl taint node node-name key=value:effect
 kubectl taint node node-name data=test:NoExecute
+
+cmnds:
+---------
+
+ kubectl taint node node01 data=test:NoExecute ---> for taint node with noexecute permisions,pods are not running inthis node during this stage
+ kubectl taint node node01 data-  --> delete the taint later pods can be schdules
+ kubectl cordon node01  --> scheduling option is disbleling that means pods cant be scheduling
+ kubectl uncordon node01 --> deleting the disable option of scheduling that means pods schedules
+ kubectl describe node controlplane ---> more info about master node/control plane
+ kubectl describe node node01 ---> more info about worker node
+ kubectl cordon controlplane ---> schedule option disable in controlplane node
+ kubectl uncordon controlplane ---> remove scheduling disable option
+ 
+ here whatever we did by cordon,taint for master and worker those are all we can able to see in 'describe' command.
+
 
 NoSchedule, PreferNoSchedule, NoExecute
 
