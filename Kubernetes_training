@@ -1,3 +1,42 @@
+for trouble shooting of kube api-server then goto the lab killerkoda api-server crash lab then u can able to understand easily.
+vi /etc/kubernetes/manifests/  --> all manifest files shows here. like kube api-server.yml,etcd.yml,scheduler.yml,controller.yml. these are all master node default
+pods which are running in kube-system namespace. for checking
+kubectl get pods -n kube-system.
+if something wrong with any default pods then u can see yml fikes or pods describing way.
+
+logs checking for pods and containers in k8s:
+-----------------------------------------------
+/var/log/pods
+/var/log/containers
+crictl ps + crictl logs
+docker ps + docker logs (in case when Docker is used)
+kubelet logs: /var/log/syslog or journalctl
+
+Solution:
+-------------
+# always make a backup !
+cp /etc/kubernetes/manifests/kube-apiserver.yaml ~/kube-apiserver.yaml.ori
+
+# make the change
+vim /etc/kubernetes/manifests/kube-apiserver.yaml
+
+# wait till container restarts
+watch crictl ps
+
+# check for apiserver pod
+k -n kube-system get pod
+
+Apiserver is not coming back, we messed up!:
+------------------------------------------------
+# check pod logs
+cat /var/log/pods/kube-system_kube-apiserver-controlplane_a3a455d471f833137588e71658e739da/kube-apiserver/X.log
+> 2022-01-26T10:41:12.401641185Z stderr F Error: unknown flag: --this-is-very-wrong
+
+Now undo the change and continue:
+-----------------------------------
+# smart people use a backup
+cp ~/kube-apiserver.yaml.ori /etc/kubernetes/manifests/kube-apiserver.yaml
+
 switch to namespace:
 ---------------------
 kubectl config set-context $(kubectl config current-context) --namespace=default
