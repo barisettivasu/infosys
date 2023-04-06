@@ -6,6 +6,26 @@ exit  ---> exit of container but container may stops
 cntrl+p+q  --> exit from container but container doesnt stops.
 kill -9 <process no>   ---> kill the particuler process
 docker commit <containerid> <imagename>  ---> running container convert to an image
+docker run -itd --name mynginx nginx:latest  --> creating nginx container after you can check "ip a" used for ethernet is created suppose if no of containers
+                                                 running so no of ethernet creates.
+Networking:
+----------------
+it allows communication b/w inside containet to outside world via host m/c.theree types
+1)bridge
+2)host
+3)null or none
+
+1) if two containers in same n/w (bridge),then if you pining to in a particuler container then two networks are connected(pining) with network names.
+ping -c 5 C1-c3
+You can connect different networks to container that one container to have diff networks. then communication happends diff networks(bridge-bridge).
+creating network:
+-----------------
+docker create network <network-name> type=bridge or host or null
+
+docker run -itd --network host --name <give name> busybox  --> creating container and add netwrk
+ip a --> shows linked connections in container only
+ip  --> no linked connections shows
+
 
 Bind mounts:
 -----------
