@@ -1,5 +1,24 @@
-Docker Essentials - 1 Day
+command:
+---------
+ps -elf | grep "apache2"   ----> for knowing about apache2 process from host or from container as well.if u want to see in container then after entering(exec command).
+exit  ---> exit of container but container may stops
+cntrl+p+q  --> exit from container but container doesnt stops.
+kill -9 <process no>   ---> kill the particuler process
+docker commit <containerid> <imagename>  ---> running container convert to an image
 
+Bind mounts:
+-----------
+docker run -d -it --name newbind --mount type=bind, source=/home/ubuntu/share,target=/app nginx:latest  ---> for bind mounts to running container
+
+tmpfs:
+---------
+docker run -d -it --name newtmpfs --mount type=tmpfs,source=/home/ubuntu/share,target=/app nginx:latest  ---> with in the container if container loss data will also loss
+
+docker stop $(docker ps -aq)  ---> for stop all containers
+docker container prune  ---> for stop and delete containers
+-----------------------------
+Docker Essentials - 1 Day
+-------------------------
 
 Lab 1: Creating an EC2 Instance in AWS and Installing Docker
 
