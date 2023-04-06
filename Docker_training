@@ -1,6 +1,7 @@
 command:
 ---------
 ps -elf | grep "apache2"   ----> for knowing about apache2 process from host or from container as well.if u want to see in container then after entering(exec command).
+systemd -cglf   ---> for knowing diff processes of containers from host
 exit  ---> exit of container but container may stops
 cntrl+p+q  --> exit from container but container doesnt stops.
 kill -9 <process no>   ---> kill the particuler process
