@@ -70,3 +70,64 @@ $ oc get route
 Describing the route
 To describe the route, use the following command.
 $ oc describe route nginx
+--------------------------------------------------------------------------------------------------------------------------------------------------
+ https://console.redhat.com/openshift/install  ---create account for console of openshhift
+-------------------------------------------------------------------------------------------------
+lab 01:oc install and login to openshift:
+-------------------------------------
+
+    1  yum install wget
+    2  wget https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz
+    3  ls
+    4  tar -xzvf openshift-client-linux.tar.gz
+    5  ls
+    6  mv oc kubectl /usr/bin
+    7  ls
+    8  oc get nodes
+    9  kubectl get nodes
+   10  oc login https://api.testoc.openshiftoc.tk:6443 -u kubeadmin -p 6Xhfp-hbINR-MxD7R-qZM7u
+   11  oc get nodes
+   12  history
+----------------------------------------------------------------------------------
+basic commands:
+-----------------  
+  3  oc get pods
+    4  oc get nodes
+    5  oc debug node/ip-10-0-131-83.ap-south-1.compute.internal
+    6  oc get ns
+    7  oc get ns | grep "nginx"
+    8  oc new-project nginx-vasu
+    9  oc get ns | grep "nginx"
+   10  oc adm policy add-scc-to-user anyuid -z default
+   11  oc status
+   12  oc get nodes
+   13  oc get pods
+   14  oc get policies
+   15  oc get policy
+   16  oc get clusterrole
+   17  oc get clusterrole | grep "default"
+   18  oc project
+   19  oc new-app --docker-image=nginx --name=nginx-vasu
+   20  oc get pod
+   21  kubectl get pod
+   22  oc get svc
+   23  oc status
+   24  oc project nginx
+   25  oc project
+   26  oc project nginx-vasu
+   27  oc project
+   28  oc edit svc nginx
+   29  oc edit svc nginx-vasu
+   30  oc get svc
+   31  oc expose svc nginx-vasu
+   32  oc get route
+   33  curl nginx-vasu-nginx-vasu.apps.testoc.openshiftoc.tk
+   34  history
+
+--------------------------------------------
+for tab terminal working trouble we need to do some configuration in vi '.bashrc' file. and you can kubeconfig file path in in this file . if u comeout or logout also openshift comnds executes.
+
+at last line:
+source <(oc completion bash)
+source <(kubectl completion bash)
+-----------------------------------------------
