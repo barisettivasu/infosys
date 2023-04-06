@@ -1,3 +1,7 @@
+switch to namespace:
+---------------------
+kubectl config set-context $(kubectl config current-context) --namespace=default
+-----------------------
 Lab: 0 Create kubeadm cluster 
 
  Lab: 1
@@ -593,6 +597,7 @@ cmnds:
 ---------
 
  kubectl taint node node01 data=test:NoExecute ---> for taint node with noexecute permisions,pods are not running inthis node during this stage
+ kubectl taint node node01 data=test:NoSchedule ---> for taint the node with noschedule permision
  kubectl taint node node01 data-  --> delete the taint later pods can be schdules
  kubectl cordon node01  --> scheduling option is disbleling that means pods cant be scheduling
  kubectl uncordon node01 --> deleting the disable option of scheduling that means pods schedules
