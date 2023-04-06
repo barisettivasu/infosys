@@ -1,0 +1,19 @@
+#job and cronejob are used for backup the etcd or application containers data.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cronjob-ctr
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - echo Hello World!
+          restartPolicy: OnFailure
