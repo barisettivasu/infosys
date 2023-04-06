@@ -1,4 +1,4 @@
-#job and cronejob are used for backup the etcd or application containers data.
+#job and based on that cronejob are used for backup the etcd or application containers data.
 apiVersion: batch/v1
 kind: CronJob
 metadata:
