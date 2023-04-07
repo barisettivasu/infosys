@@ -15,7 +15,8 @@ create any one instance and install zip package of openshift nd then login.
 3)tar -xzvf openshift-client-linux.tar.gz
 4)mv oc kubectl /usr/bin
 5)oc --> oc command u can executes for checking whether oc working or not.
-5)oc login https://api.newoc.openshiftoc.tk:6443 -u <username> -p <password>
+5)oc login https://api.newoc.openshiftoc.tk:6443 -u <username> -p <password> OR
+6)6)oc login --token=<tokennumber> --server=https://api.newoc1.openshiftoc.tk:6443
 6) oc get nodes or svc -->checking oc successfully working.
 
 Prerequisites:
