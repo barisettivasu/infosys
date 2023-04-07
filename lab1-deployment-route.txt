@@ -1,6 +1,23 @@
 Introduction:
 OpenShift is a container application platform that allows developers to deploy, manage and scale applications on the cloud. In this tutorial, we will explore some of the commonly used OpenShift commands to perform basic operations such as creating an application, managing services, and exposing applications.
 
+through console:
+--------------------
+++console-openshift-console.apps.testoc.openshiftoc.tk ---> openshift console
+++https://console-openshift-console.apps.newoc.openshiftoc.tk/ ---> console login openshift
+username:kubeadmin
+password:dbN4S-XLTIT-UbCiN-mFqt3
+through cli login:
+-------------------
+create any one instance and install zip package of openshift nd then login.
+1)yum install curl wget unzip -y
+2)wget https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz
+3)tar -xzvf openshift-client-linux.tar.gz
+4)mv oc kubectl /usr/bin
+5)oc --> oc command u can executes for checking whether oc working or not.
+5)oc login https://api.newoc.openshiftoc.tk:6443 -u kubeadmin -p dbN4S-XLTIT-UbCiN-mFqt3
+6) oc get nodes or svc -->checking oc successfully working.
+
 Prerequisites:
 Before starting the lab, ensure that you have the following:
 
@@ -12,6 +29,8 @@ Lab: create nginx project
 $oc new-project nginx
 Adding Security Context Constraints (SCC)
 The first step is to add anyuid Security Context Constraints to the default service account. This allows the pod to run as a non-root user.
+
+$oc debug node/ip-10-0-131-83.ap-south-1.compute.internal ---> for debuging of node
 
 $ oc adm policy add-scc-to-user anyuid -z default
 
