@@ -74,6 +74,8 @@ $ oc edit svc nginx
 Getting pod details again
 To get the pod details again, use the following command.
 $ oc get pod
+switch to particuler project in openshift:
+$ oc project <projectname>
 
 Exposing the service
 To expose the service, use the following command.
