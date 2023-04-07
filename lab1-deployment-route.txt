@@ -5,8 +5,8 @@ through console:
 --------------------
 ++console-openshift-console.apps.testoc.openshiftoc.tk ---> openshift console
 ++https://console-openshift-console.apps.newoc.openshiftoc.tk/ ---> console login openshift
-username:kubeadmin
-password:dbN4S-XLTIT-UbCiN-mFqt3
+username:<username>
+password:<password>
 through cli login:
 -------------------
 create any one instance and install zip package of openshift nd then login.
@@ -15,7 +15,7 @@ create any one instance and install zip package of openshift nd then login.
 3)tar -xzvf openshift-client-linux.tar.gz
 4)mv oc kubectl /usr/bin
 5)oc --> oc command u can executes for checking whether oc working or not.
-5)oc login https://api.newoc.openshiftoc.tk:6443 -u kubeadmin -p dbN4S-XLTIT-UbCiN-mFqt3
+5)oc login https://api.newoc.openshiftoc.tk:6443 -u <username> -p <password>
 6) oc get nodes or svc -->checking oc successfully working.
 
 Prerequisites:
